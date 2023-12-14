@@ -1,3 +1,12 @@
+mutter (44.8-3+pn1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Add PineNote-related patch that basically forces mutter to view epd
+    displays as built-in. This ensures that the touchscreen is rotated when we
+    do a screen rotation.
+
+ -- Maximilian Weigand <mweigand@mweigand.net>  Mo 19. Feb 20:06:30 -0500
+
 mutter (44.8-3) unstable; urgency=medium
 
   * Cherry-pick several cursor fix to fix compatibility with latest
