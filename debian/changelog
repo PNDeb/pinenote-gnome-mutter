@@ -1,3 +1,13 @@
+mutter (43.8-0+deb12u1.1) bookworm; urgency=medium
+
+  [ Maximilian Weigand  (PineNote Signing Key 2) ]
+  * Non-maintainer upload.
+  * Add PineNote-related patch that basically forces mutter to view epd
+    displays as built-in. This ensures that the touchscreen is rotated when we
+    do a screen roation.
+
+ -- Maximilian Weigand <mweigand@mweigand.net>  Thu, 14 Dec 2023 20:24:50 +0100
+
 mutter (43.8-0+deb12u1) bookworm; urgency=medium
 
   [ Simon McVittie ]

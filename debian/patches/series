@@ -1,3 +1,4 @@
+pinenote_Add-META_CONNECTOR_TYPE_DPI.patch
 tests-Reinstate-meta_test_get_plugin_name.patch
 tests-Break-up-stacking-installed-tests-into-more-smaller.patch
 tests-Use-a-more-interoperable-path-to-bash.patch
