@@ -1,0 +1,51 @@
+From e5b50d14cfb0fc776a179b582ec26e40d371b6cb Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jonas=20Dre=C3=9Fler?= <verdre@v0yd.nl>
+Date: Sat, 2 Sep 2023 15:52:57 +0200
+Subject: [PATCH] wayland: Get device directly from clutter in get_grab_info()
+ for touch case
+
+When we call get_grab_info() to get the sequence, device and coordinates for
+a touch window drag, as the device we use the device from the
+MetaWaylandPointer, assuming that it's set to the core pointer.
+
+In the case where there is no pointer device present on the seat (so no
+mouse nor touchpad), the wayland pointer remains disabled though, and
+pointer->device is NULL.
+
+This means touch window dragging on hardware without pointer devices
+present is broken (because MetaWindowDrag assumes that there's a valid
+device passed in meta_window_drag_begin()). Fix it by taking the core
+pointer directly from ClutterSeat instead of going the extra detour through
+MetaWaylandPointer.
+
+Part-of: <https://gitlab.gnome.org/GNOME/mutter/-/merge_requests/3238>
+---
+ src/wayland/meta-wayland-seat.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/src/wayland/meta-wayland-seat.c b/src/wayland/meta-wayland-seat.c
+index 176bb1c4a0..f89c43a511 100644
+--- a/src/wayland/meta-wayland-seat.c
++++ b/src/wayland/meta-wayland-seat.c
+@@ -455,13 +455,17 @@ meta_wayland_seat_get_grab_info (MetaWaylandSeat       *seat,
+   if (meta_wayland_seat_has_touch (seat))
+     {
+       ClutterEventSequence *sequence;
++
+       sequence = meta_wayland_touch_find_grab_sequence (seat->touch,
+                                                         surface,
+                                                         serial);
+       if (sequence)
+         {
++          ClutterSeat *clutter_seat =
++            clutter_backend_get_default_seat (clutter_get_default_backend ());
++
+           if (device_out)
+-            *device_out = seat->pointer->device;
++            *device_out = clutter_seat_get_pointer (clutter_seat);
+           if (sequence_out)
+             *sequence_out = sequence;
+ 
+-- 
+GitLab
+

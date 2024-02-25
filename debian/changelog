@@ -1,3 +1,9 @@
+mutter (44.8-3+pn1.1) unstable; urgency=medium
+
+  * Try to fix https://gitlab.gnome.org/GNOME/mutter/-/issues/2897
+
+ -- Maximilian Weigand <mweigand@mweigand.net>  Sun, 25 Feb 2024 18:59:58 +0000
+
 mutter (44.8-3+pn1) unstable; urgency=medium
 
   * Non-maintainer upload.
@@ -5,7 +11,7 @@ mutter (44.8-3+pn1) unstable; urgency=medium
     displays as built-in. This ensures that the touchscreen is rotated when we
     do a screen rotation.
 
- -- Maximilian Weigand <mweigand@mweigand.net>  Mo 19. Feb 20:06:30 -0500
+ -- Maximilian Weigand <mweigand@mweigand.net>  Mo, 19. Feb 20:06:30 -0500
 
 mutter (44.8-3) unstable; urgency=medium
 
